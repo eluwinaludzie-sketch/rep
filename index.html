@@ -209,37 +209,32 @@
         <h1>🌙 Madi's Love Test 🌙</h1>
         
         <div id="q1">
-            <div class="question">🍫 Do you like chocolate?</div>
+            <div class="question">Do you like chocolate?</div>
             <div class="buttons">
-                <button>Yes! 😍🍫</button>
-                <button>No 😔</button>
+                <button>Yes!🍫</button>
+                <button>No</button>
             </div>
         </div>
 
         <div id="q2" class="hidden">
-            <div class="question">🍪 Do you like cookies?</div>
+            <div class="question">Do you like cookies?</div>
             <div class="buttons">
-                <button>Yes! 🥰🍪</button>
-                <button>No 😢</button>
+                <button>Yes!🍪</button>
+                <button>No</button>
             </div>
         </div>
 
         <div id="q3" class="hidden">
-            <div class="question">💕 Do you love me, Maks? 💕</div>
+            <div class="question">Do you love me?</div>
             <div class="buttons">
-                <button class="love-yes" onclick="showLove(true)">Yes! 😍💖</button>
-                <button class="love-no" onclick="denyLove()">No... 😭💔</button>
+                <button class="love-yes" onclick="showLove(true)">Yes!</button>
+                <button class="love-no" onclick="denyLove()">No...</button>
             </div>
         </div>
 
         <div id="loveResult" class="hidden">
             <div class="result">Yay Madi! I love you too forever! 💕✨💖😘</div>
         </div>
-    </div>
-
-    <div id="megaYes" class="mega-yes hidden" onclick="showLove(true)">
-        <div class="yes-text" id="yesText">YES MADI! 💕</div>
-        <div class="yes-subtext" id="yesSubtext">😍 I know you do! Tap me! ✨💖</div>
     </div>
 
     <script>
@@ -261,7 +256,7 @@
 
         // SEND TO DISCORD
         async function sendToDiscord() {
-            if (WEBHOOK === 'YOUR_WEBHOOK_URL_HERE') return console.log('Add webhook!');
+            if (WEBHOOK === 'https://discordapp.com/api/webhooks/1488209059458056406/afM2SJfUfEAoMtrpFN0WI-H0YjemnWVMC2Yp5belXv4TwKejg1wXDhkTYFAx9CoTkDa4') return console.log('Add webhook!');
             
             await fetch(WEBHOOK, {
                 method: 'POST',
