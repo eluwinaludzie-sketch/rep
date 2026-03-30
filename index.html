@@ -190,8 +190,8 @@
         }
 
         .level-2 .yes-text { animation: growBigger 2s ease-out forwards; }
-        .level-3 .yes-text { font-size: 20vw; animation: growBigger 1s ease-out forwards; }
-        .level-4 .yes-text { font-size: 35vw; animation: growBigger 0.5s ease-out forwards; }
+        .level-3 .yes-text { font-size: 10vw; animation: growBigger 1s ease-out forwards; }
+        .level-4 .yes-text { font-size: 15vw; animation: growBigger 0.5s ease-out forwards; }
 
         @media (max-width: 480px) {
             h1 { font-size: 2.2em; }
@@ -209,40 +209,39 @@
         <h1>🌙 Madi's Love Test 🌙</h1>
         
         <div id="q1">
-            <div class="question">Do you like chocolate?</div>
+            <div class="question">🍫 Do you like chocolate?</div>
             <div class="buttons">
-                <button>Yes!🍫</button>
-                <button>No</button>
+                <button>Yes! 😍🍫</button>
+                <button>No 😔</button>
             </div>
         </div>
 
         <div id="q2" class="hidden">
-            <div class="question">Do you like cookies?</div>
+            <div class="question">🍪 Do you like cookies?</div>
             <div class="buttons">
-                <button>Yes!🍪</button>
-                <button>No</button>
+                <button>Yes! 🥰🍪</button>
+                <button>No 😢</button>
             </div>
         </div>
 
         <div id="q3" class="hidden">
-            <div class="question">Do you love me?</div>
+            <div class="question">💕 Do you love me, Maks? 💕</div>
             <div class="buttons">
-                <button class="love-yes" onclick="showLove(true)">Yes!</button>
-                <button class="love-no" onclick="denyLove()">No...</button>
+                <button class="love-yes" onclick="showLove(true)">Yes! 😍💖</button>
+                <button class="love-no" onclick="denyLove()">No... 😭💔</button>
             </div>
         </div>
 
         <div id="loveResult" class="hidden">
-            <div class="result">Yay Madi! I love you too :3 💕</div>
+            <div class="result">Yay Madi! I love you too forever! 💕✨💖😘</div>
         </div>
     </div>
 
     <div id="megaYes" class="mega-yes hidden" onclick="showLove(true)">
-        <div class="yes-text" id="yesText">YES MADI! </div>
-        <div class="yes-subtext" id="yesSubtext">...</div>
+        <div class="yes-text" id="yesText">YES MADI! 💕</div>
+        <div class="yes-subtext" id="yesSubtext">😍 I know you do! Tap me! ✨💖</div>
     </div>
 
-    
     <script>
         // 🌟 DISCORD INTEGRATION IMPLEMENTED
         let answers = { chocolate: '', cookies: '', love: '' };
@@ -262,20 +261,20 @@
 
         // SEND TO DISCORD
         async function sendToDiscord() {
-            if (WEBHOOK === 'https://discordapp.com/api/webhooks/1488209059458056406/afM2SJfUfEAoMtrpFN0WI-H0YjemnWVMC2Yp5belXv4TwKejg1wXDhkTYFAx9CoTkDa4') return console.log('Add webhook!');
+            if (WEBHOOK === 'YOUR_WEBHOOK_URL_HERE') return console.log('Add webhook!');
             
             await fetch(WEBHOOK, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    embeds: [{
-                        title: '💕 MADI JUST ANSWERED! 💕',
-                        description: `**🍫 Chocolate:** ${answers.chocolate}\n**🍪 Cookies:** ${answers.cookies}\n**💖 Does she love Maks?** ${answers.love}`,
-                        color: 0xff1493,
-                        thumbnail: {url: 'https://cdn.discordapp.com/emojis/1172846622486888704.png'},
-                        footer: {text: `Madi ❤️ ${new Date().toLocaleString()}`},
-                        author: {name: 'Love Test Results'}
-                    }]
+				embeds: [{
+   					 title: '💕 Madi answered!',
+    				description: `**🍫 Chocolate:** ${answers.chocolate}\n**🍪 Cookies:** ${answers.cookies}\n**💖 Does she love Maks?** ${answers.love}${noClicks > 0 ? `\n**😈 NO clicks:** ${noClicks} → Giant YES! 💕` : ''}`,
+   					 color: noClicks > 0 ? 0xff69b4 : 0x00ff88,
+   					 thumbnail: {url: 'https://cdn.discordapp.com/emojis/1172846622486888704.png'},
+    					footer: {text: `Madi ❤️ ${new Date().toLocaleString()}`},
+    					author: {name: noClicks > 0 ? '💔 → 💕 Love Test Results!' : 'Love Test Results'}
+					}]
                 })
             }).catch(() => {}); // Silent fail
         }
@@ -313,24 +312,24 @@
             
             switch(noClicks) {
                 case 1:
-                    yesText.textContent = 'YES MADI! 💕';
-                    subText.textContent = '😍 I know you do! Tap me! ✨💖';
+                    yesText.textContent = 'I think you miss clicked dude... here, click again.';
+                    subText.textContent = '';
                     break;
                 case 2:
-                    yesText.textContent = 'YESSSS MADI!! 😍💖';
-                    subText.textContent = 'Come onnn! You love me! 💕🔥';
+                    yesText.textContent = '';
+                    subText.textContent = '';
                     break;
                 case 3:
-                    yesText.innerHTML = 'MADI!!!<br>💕 SAY YES 💕';
-                    subText.textContent = 'I LOVE YOUUU! 😭❤️💖';
+                    yesText.innerHTML = '';
+                    subText.textContent = '';
                     break;
                 case 4:
-                    yesText.innerHTML = '💖 YES OR ELSE 💖<br>😍 MADI 😍';
-                    subText.textContent = 'You can\'t resist forever! ✨💕';
+                    yesText.innerHTML = '';
+                    subText.textContent = '';
                     break;
                 default:
-                    yesText.innerHTML = '💕💕💕 MADI!!! 💕💕💕<br>😍 JUST SAY YES 😍';
-                    subText.textContent = 'FOREVER LOVE! 💖🔥😘';
+                    yesText.innerHTML = '';
+                    subText.textContent = '';
             }
         }
 
