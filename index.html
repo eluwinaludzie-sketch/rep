@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madi's Love Test 🌙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .question-container {
+            background: rgba(20, 20, 40, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 100, 150, 0.3);
+            padding: 40px 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            transform: scale(0);
+            animation: slideIn 0.8s ease-out forwards;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            to { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #ff6b9d, #ff8e8e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+        }
+
+        .question {
+            font-size: 1.9em;
+            color: #f0f0f0;
+            margin-bottom: 35px;
+            line-height: 1.4;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 35px;
+            font-size: 1.3em;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        button:hover::before { left: 100%; }
+        button:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 40px rgba(102, 126, 234, 0.6); }
+
+        .love-yes {
+            background: linear-gradient(45deg, #00b894 0%, #00cec9 100%);
+            box-shadow: 0 12px 30px rgba(0, 184, 148, 0.5);
+            animation: lovePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes lovePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .love-yes:hover { box-shadow: 0 20px 40px rgba(0, 184, 148, 0.7); }
+
+        .love-no {
+            background: linear-gradient(45deg, #e17055 0%, #d63031 100%);
+            box-shadow: 0 12px 30px rgba(230, 112, 85, 0.4);
+        }
+
+        .love-no:hover { box-shadow: 0 20px 40px rgba(230, 112, 85, 0.6); }
+
+        .result {
+            font-size: 3em;
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(0, 184, 148, 0.6);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(0, 184, 148, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(0, 184, 148, 0.8)); }
+        }
+
+        .question-container.denied {
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .mega-yes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, rgba(255, 107, 157, 0.95) 0%, rgba(15, 15, 35, 0.95) 70%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+            animation: megaShake 0.5s ease-in-out;
+        }
+
+        .yes-text {
+            font-size: 12vw;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 60px #ff6b9d, 0 0 120px #ff8e8e;
+            margin-bottom: 5vh;
+            animation: megaPulse 1s ease-in-out infinite;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .yes-subtext {
+            font-size: 4vw;
+            color: rgba(255,255,255,0.95);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            max-width: 80%;
+        }
+
+        @keyframes megaPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes megaShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2%); }
+            75% { transform: translateX(2%); }
+        }
+
+        @keyframes growBigger {
+            0% { transform: scale(1); font-size: 12vw; }
+            100% { transform: scale(1.5); font-size: 25vw; }
+        }
+
+        .level-2 .yes-text { animation: growBigger 2s ease-out forwards; }
+        .level-3 .yes-text { font-size: 20vw; animation: growBigger 1s ease-out forwards; }
+        .level-4 .yes-text { font-size: 35vw; animation: growBigger 0.5s ease-out forwards; }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2em; }
+            .question { font-size: 1.6em; }
+            button { font-size: 1.2em; padding: 18px 28px; }
+            .yes-text { font-size: 18vw; }
+            .yes-subtext { font-size: 6vw; }
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="question-container" id="questionContainer">
+        <h1>🌙 Madi's Love Test 🌙</h1>
+        
+        <div id="q1">
+            <div class="question">🍫 Do you like chocolate?</div>
+            <div class="buttons">
+                <button>Yes! 😍🍫</button>
+                <button>No 😔</button>
+            </div>
+        </div>
+
+        <div id="q2" class="hidden">
+            <div class="question">🍪 Do you like cookies?</div>
+            <div class="buttons">
+                <button>Yes! 🥰🍪</button>
+                <button>No 😢</button>
+            </div>
+        </div>
+
+        <div id="q3" class="hidden">
+            <div class="question">💕 Do you love me, Maks? 💕</div>
+            <div class="buttons">
+                <button class="love-yes" onclick="showLove(true)">Yes! 😍💖</button>
+                <button class="love-no" onclick="denyLove()">No... 😭💔</button>
+            </div>
+        </div>
+
+        <div id="loveResult" class="hidden">
+            <div class="result">Yay Madi! I love you too forever! 💕✨💖😘</div>
+        </div>
+    </div>
+
+    <div id="megaYes" class="mega-yes hidden" onclick="showLove(true)">
+        <div class="yes-text" id="yesText">YES MADI! 💕</div>
+        <div class="yes-subtext" id="yesSubtext">😍 I know you do! Tap me! ✨💖</div>
+    </div>
+
+    <script>
+        // 🌟 DISCORD INTEGRATION IMPLEMENTED
+        let answers = { chocolate: '', cookies: '', love: '' };
+        const WEBHOOK = 'https://discordapp.com/api/webhooks/1488209059458056406/afM2SJfUfEAoMtrpFN0WI-H0YjemnWVMC2Yp5belXv4TwKejg1wXDhkTYFAx9CoTkDa4'; // ← PASTE YOUR DISCORD WEBHOOK HERE!
+        
+        let currentQuestion = 1;
+        let noClicks = 0;
+
+        // Track ALL button clicks for answers
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') {
+                const q = e.target.closest('[id^="q"]').id;
+                if (q === 'q1') answers.chocolate = e.target.textContent;
+                if (q === 'q2') answers.cookies = e.target.textContent;
+            }
+        });
+
+        // SEND TO DISCORD
+        async function sendToDiscord() {
+            if (WEBHOOK === 'YOUR_WEBHOOK_URL_HERE') return console.log('Add webhook!');
+            
+            await fetch(WEBHOOK, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    embeds: [{
+                        title: '💕 MADI JUST ANSWERED! 💕',
+                        description: `**🍫 Chocolate:** ${answers.chocolate}\n**🍪 Cookies:** ${answers.cookies}\n**💖 Does she love Maks?** ${answers.love}`,
+                        color: 0xff1493,
+                        thumbnail: {url: 'https://cdn.discordapp.com/emojis/1172846622486888704.png'},
+                        footer: {text: `Madi ❤️ ${new Date().toLocaleString()}`},
+                        author: {name: 'Love Test Results'}
+                    }]
+                })
+            }).catch(() => {}); // Silent fail
+        }
+
+        function nextQuestion(event) {
+            document.getElementById('q' + currentQuestion).classList.add('hidden');
+            currentQuestion++;
+            setTimeout(() => {
+                document.getElementById('q' + currentQuestion).classList.remove('hidden');
+            }, 400);
+        }
+
+        function showLove(lovesMe) {
+            answers.love = lovesMe ? 'YES 😍💖' : 'NO → Giant YES! 💕';
+            sendToDiscord(); // 🚀 SENDS TO DISCORD INSTANTLY!
+            
+            document.getElementById('q3').classList.add('hidden');
+            document.getElementById('megaYes').classList.add('hidden');
+            document.getElementById('questionContainer').classList.remove('denied');
+            setTimeout(() => {
+                document.getElementById('loveResult').classList.remove('hidden');
+            }, 400);
+        }
+
+        function denyLove() {
+            noClicks++;
+            document.getElementById('questionContainer').classList.add('denied');
+            document.getElementById('megaYes').classList.remove('hidden');
+            
+            const yesText = document.getElementById('yesText');
+            const subText = document.getElementById('yesSubtext');
+            const megaYes = document.getElementById('megaYes');
+            
+            megaYes.className = `mega-yes level-${noClicks}`;
+            
+            switch(noClicks) {
+                case 1:
+                    yesText.textContent = 'YES MADI! 💕';
+                    subText.textContent = '😍 I know you do! Tap me! ✨💖';
+                    break;
+                case 2:
+                    yesText.textContent = 'YESSSS MADI!! 😍💖';
+                    subText.textContent = 'Come onnn! You love me! 💕🔥';
+                    break;
+                case 3:
+                    yesText.innerHTML = 'MADI!!!<br>💕 SAY YES 💕';
+                    subText.textContent = 'I LOVE YOUUU! 😭❤️💖';
+                    break;
+                case 4:
+                    yesText.innerHTML = '💖 YES OR ELSE 💖<br>😍 MADI 😍';
+                    subText.textContent = 'You can\'t resist forever! ✨💕';
+                    break;
+                default:
+                    yesText.innerHTML = '💕💕💕 MADI!!! 💕💕💕<br>😍 JUST SAY YES 😍';
+                    subText.textContent = 'FOREVER LOVE! 💖🔥😘';
+            }
+        }
+
+        // Wire up question buttons
+        document.querySelectorAll('#q1 button, #q2 button').forEach(btn => {
+            btn.onclick = (e) => nextQuestion(e);
+        });
+    </script>
+</body>
+</html>
